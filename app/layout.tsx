@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Your Name – Portfolio",
+    title: "RITU RAJ – Portfolio",
     description:
       "Personal portfolio of Your Name – Frontend/Full‑Stack Developer. Projects, skills, certificates, and contact.",
     images: ["/og-image.png"],

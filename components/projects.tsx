@@ -14,8 +14,8 @@ const projects: Project[] = [
     image: "/qrgate.png",
     tech: ["React.js", "Firebase Auth", "QR Code", "FCM"],
     links: [
-      { label: "Live", href: "#" },
-      { label: "Code", href: "#" },
+      // { label: "Live", href: "#" },
+      { label: "Code", href: "https://github.com/RITU2390/projectfinal02" },
     ],
   },
   {
@@ -25,8 +25,8 @@ const projects: Project[] = [
     image: "/VMS.png",
     tech: ["HTML", "CSS", "JavaScript", "MySQL"],
     links: [
-      { label: "Live", href: "#" },
-      { label: "Code", href: "#" },    ],
+      // { label: "Live", href: "#" },
+      { label: "Code", href: "https://github.com/RITU2390/vmsproject" },    ],
   },
 ]
 
