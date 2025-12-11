@@ -123,7 +123,7 @@ export default function Hero() {
             className="mt-6"
           >
             <a
-              href="/RITU-RAJ_resume.pdf"
+              href="/RITU-RAJ_resume_latest.pdf"
               download
               className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-6 py-3 text-white font-semibold shadow-lg shadow-cyan-500/50 hover:bg-cyan-600 transition-all duration-300"
             >

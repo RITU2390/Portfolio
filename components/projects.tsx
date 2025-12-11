@@ -8,6 +8,17 @@ type Project = {
 
 const projects: Project[] = [
   {
+    title: "SkillBridge – A Platform to Connect Volunteers with NGOs",
+    description:
+      "Full-stack platform connecting skilled volunteers with NGOs. Includes guided onboarding, profile management, project posting, assignment workflows, dashboards for both roles, and secure JWT-based authentication with protected routes. Built with a modular architecture, optimized MongoDB schemas, and reusable React UI components.",
+    image: "/landing%20page.png",
+    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "JWT"],
+    links: [
+      // { label: "Live", href: "#" },
+      { label: "Code", href: "https://github.com/springboardmentor210/SkillBridge_Team4" },
+    ],
+  },
+  {
     title: "QR-Based E-Gate Pass Management System",
     description:
       "Developed a responsive single-page application (SPA) using React.js and Firebase Authentication for secure visitor registration and appointment scheduling. Implemented dynamic QR code generation for gate access upon approval and integrated Firebase Cloud Messaging (FCM) to deliver real-time notifications for appointment status updates.",
@@ -45,13 +56,13 @@ export default function Projects() {
               className="group flex flex-col rounded-xl border border-white/10 bg-white/5 p-4 transition-transform hover:-translate-y-1"
             >
               {/* Image */}
-              <div className="overflow-hidden rounded-lg border border-white/10">
+              <div className="overflow-hidden rounded-lg border border-white/10 bg-black">
                 <img
                   src={p.image || "/placeholder.svg"}
                   alt={`${p.title} screenshot`}
                   width={1280}
                   height={720}
-                  className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  className="w-full aspect-[4/3] object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                   loading="lazy"
                 />
               </div>

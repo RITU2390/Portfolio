@@ -16,17 +16,17 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Your Name – Portfolio",
+  title: "RITU RAJ – Portfolio",
   description:
-    "Personal portfolio of Your Name – Frontend/Full‑Stack Developer. Projects, skills, certificates, and contact.",
+    "Personal portfolio of RITU RAJ – Frontend/Full‑Stack Developer. Projects, skills, certificates, and contact.",
   keywords: ["Portfolio", "Developer", "Frontend", "Web", "Projects"],
   metadataBase: new URL("https://example.com"),
   openGraph: {
-    title: "Your Name – Portfolio",
+    title: "RITU RAJ – Portfolio",
     description:
-      "Personal portfolio of Your Name – Frontend/Full‑Stack Developer. Projects, skills, certificates, and contact.",
+      "Personal portfolio of RITU RAJ – Frontend/Full‑Stack Developer. Projects, skills, certificates, and contact.",
     url: "https://example.com",
-    siteName: "Your Name – Portfolio",
+    siteName: "RITU RAJ – Portfolio",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Your Name – Portfolio" }],
     type: "website",
   },
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "RITU RAJ – Portfolio",
     description:
-      "Personal portfolio of Your Name – Frontend/Full‑Stack Developer. Projects, skills, certificates, and contact.",
+      "Personal portfolio of RITU RAJ – Frontend/Full‑Stack Developer. Projects, skills, certificates, and contact.",
     images: ["/og-image.png"],
   },
   icons: { icon: "/favicon.ico" },
