@@ -5,12 +5,12 @@ import { cn } from "@/lib/utils"
 
 const SECTIONS = [
   { id: "home", label: "Home" },
-  { id: "about", label: "About Me" },
+  { id: "about", label: "About" },
   { id: "education", label: "Education" },
   { id: "experience", label: "Experience" },
-  { id: "skills", label: "Skills" },
+  { id: "whatido", label: "Expertise" },
   { id: "projects", label: "Projects" },
-  { id: "certificates", label: "Certificates" },
+  { id: "certificates", label: "Achievements" },
   { id: "contact", label: "Contact" },
 ]
 
@@ -36,29 +36,39 @@ export default function StickyNav() {
   }, [])
 
   return (
-    <header className="sticky top-0 z-50 border-b border-neutral-800 bg-neutral-950/80 backdrop-blur">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-        <a href="#home" className="font-semibold text-white">
-          <span className="text-red-500">{"{ "}</span>
-          Ritu Raj
-          <span className="text-red-500">{" }"}</span>
-        </a>
-        <ul className="flex items-center gap-4">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-xl">
+      
+      {/* Glow line */}
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-blue-500/40"></div>
+
+      <nav className="mx-auto max-w-6xl px-6 py-4">
+        
+        {/* 🔥 CENTERED NAV LINKS */}
+        <ul className="flex items-center justify-center flex-wrap gap-8">
           {SECTIONS.map((s) => (
             <li key={s.id}>
               <a
                 href={`#${s.id}`}
                 className={cn(
-                  "rounded px-2 py-1 text-sm text-white/80 outline-none focus-visible:ring-2 focus-visible:ring-cyan-400",
-                  active === s.id ? "text-cyan-400" : "hover:text-white",
+                  "relative text-sm tracking-wide text-white/70 transition hover:text-white",
+                  active === s.id && "text-blue-400"
                 )}
                 aria-current={active === s.id ? "page" : undefined}
               >
                 {s.label}
+
+                {/* 🔥 Active underline */}
+                <span
+                  className={cn(
+                    "absolute left-0 -bottom-1 h-[2px] w-full scale-x-0 bg-gradient-to-r from-blue-500 to-purple-500 transition-transform origin-left",
+                    active === s.id && "scale-x-100"
+                  )}
+                />
               </a>
             </li>
           ))}
         </ul>
+
       </nav>
     </header>
   )

@@ -76,115 +76,155 @@ const certs: Cert[] = [
   },
 ]
 
-export default function CertificatesGallery() {
-  const [expanded, setExpanded] = useState<string | null>(null)
+const categories = ["All", "Coursera", "PW Skills", "Internship"]
 
-  const toggleCard = (title: string) => {
-    setExpanded(expanded === title ? null : title)
-  }
+export default function CertificatesGallery() {
+  const [activeCategory, setActiveCategory] = useState("All")
+  const [selected, setSelected] = useState<Cert | null>(null)
+
+  const filtered =
+    activeCategory === "All"
+      ? certs
+      : certs.filter((c) => c.category === activeCategory)
 
   return (
-    <section id="certificates" className="border-t border-white/10">
-      <div className="mx-auto max-w-5xl px-4 py-16">
-        <h2 className="text-3xl font-bold text-white">
-          🎓 My <span className="text-cyan-400">Certificates</span>
-        </h2>
-        <p className="mt-2 text-sm text-white/70">
-          Hover to see colorful effects, click to expand for details and preview.
-        </p>
+    <section
+      id="certificates"
+      className="relative bg-black border-t border-white/10 py-28 overflow-hidden scroll-mt-24"
+    >
+      {/* 🌌 Background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(59,130,246,0.12),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(168,85,247,0.12),transparent_40%)]"></div>
 
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {certs.map((cert) => (
-            <motion.div
-              key={cert.title}
-              layout
-              onClick={() => toggleCard(cert.title)}
-              whileHover={{
-                scale: 1.05,
-                rotateX: 3,
-                rotateY: -3,
-              }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 220, damping: 15 }}
-              className={`relative rounded-xl border border-white/10 bg-neutral-900 p-4 cursor-pointer transition overflow-hidden ${
-                expanded === cert.title ? "ring-2 ring-cyan-400" : ""
+      <div className="relative max-w-6xl mx-auto px-6">
+
+        {/* Title */}
+        <div className="text-center">
+          <h2 className="text-5xl font-bold text-white">
+            <span className="bg-gradient-to-b from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent font-sora drop-shadow-[0_0_20px_rgba(99,102,241,0.8)]">
+              Certifications & Achievements
+            </span>
+          </h2>
+
+          <p className="mt-3 text-white/60">
+            Verified credentials showcasing my continuous learning.
+          </p>
+        </div>
+
+        {/* 🔥 FILTER TABS */}
+        <div className="flex justify-center flex-wrap gap-3 mt-10">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-4 py-1.5 text-sm rounded-full border transition ${
+                activeCategory === cat
+                  ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white border-none"
+                  : "bg-white/5 text-white/70 border-white/10 hover:bg-white/10"
               }`}
             >
-              {/* Animated gradient hover background */}
-              <motion.div
-                className="absolute inset-0 opacity-0 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500"
-                whileHover={{ opacity: 0.15 }}
-                transition={{ duration: 0.4 }}
-              />
+              {cat}
+            </button>
+          ))}
+        </div>
 
-              {/* Card Content */}
-              <div className="relative flex items-center justify-between">
-                <div>
-                  <h3 className="text-sm font-medium text-white">{cert.title}</h3>
-                  <p className="text-xs text-white/70">{cert.issuer}</p>
+        {/* 🔥 GRID */}
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((cert, i) => (
+            <motion.div
+              key={cert.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05 }}
+              whileHover={{ scale: 1.05, rotateX: 3, rotateY: -3 }}
+              onClick={() => setSelected(cert)}
+              className="group relative rounded-2xl p-[1px] bg-gradient-to-r from-blue-500/40 to-purple-500/40 cursor-pointer"
+            >
+              <div className="rounded-2xl bg-zinc-900/80 backdrop-blur-xl p-5 h-full">
+
+                {/* Glow */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-2xl"></div>
+
+                <div className="relative z-10">
+                  <h3 className="text-sm font-medium text-white">
+                    {cert.title}
+                  </h3>
+                  <p className="text-xs text-white/60 mt-1">
+                    {cert.issuer}
+                  </p>
+
+                  <span className="inline-block mt-3 text-xs px-2 py-1 bg-blue-500/20 text-blue-400 rounded-full">
+                    {cert.category}
+                  </span>
                 </div>
-                <motion.div
-                  animate={{ rotate: expanded === cert.title ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="h-4 w-4 text-white/70" />
-                </motion.div>
               </div>
-
-              <AnimatePresence>
-                {expanded === cert.title && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="mt-3 space-y-3 relative z-10"
-                  >
-                    {/* Preview */}
-                    {cert.file.endsWith(".pdf") ? (
-                      <iframe
-                        src={cert.file}
-                        className="w-full h-64 rounded-md border border-white/10"
-                        title={cert.title}
-                      ></iframe>
-                    ) : (
-                      <img
-                        src={cert.file}
-                        alt={`${cert.title} preview`}
-                        className="w-full rounded-md"
-                      />
-                    )}
-
-                    {/* Details */}
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-white/50">{cert.category}</span>
-                      <div className="flex gap-2">
-                        {cert.verify && (
-                          <a
-                            href={cert.verify}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1 text-xs text-cyan-400 hover:underline"
-                          >
-                            <ExternalLink className="h-3 w-3" /> Verify
-                          </a>
-                        )}
-                        <a
-                          href={cert.file}
-                          download
-                          className="flex items-center gap-1 text-xs text-white hover:text-cyan-400"
-                        >
-                          <Download className="h-3 w-3" /> Download
-                        </a>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </motion.div>
           ))}
         </div>
       </div>
+
+      {/* 🔥 MODAL */}
+      <AnimatePresence>
+        {selected && (
+          <motion.div
+            className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelected(null)}
+          >
+            <motion.div
+              className="bg-zinc-900 rounded-2xl p-6 max-w-3xl w-full border border-white/10"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="text-lg font-semibold text-white">
+                {selected.title}
+              </h3>
+              <p className="text-sm text-white/60 mt-1">
+                {selected.issuer}
+              </p>
+
+              <div className="mt-4">
+                {selected.file.endsWith(".pdf") ? (
+                  <iframe
+                    src={selected.file}
+                    className="w-full h-[400px] rounded-lg"
+                  />
+                ) : (
+                  <img
+                    src={selected.file}
+                    className="w-full rounded-lg"
+                  />
+                )}
+              </div>
+
+              <div className="mt-4 flex justify-between text-sm">
+                {selected.verify && (
+                  <a
+                    href={selected.verify}
+                    target="_blank"
+                    className="flex items-center gap-2 text-blue-400 hover:underline"
+                  >
+                    <ExternalLink size={16} />
+                    Verify
+                  </a>
+                )}
+
+                <a
+                  href={selected.file}
+                  download
+                  className="flex items-center gap-2 text-white hover:text-blue-400"
+                >
+                  <Download size={16} />
+                  Download
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

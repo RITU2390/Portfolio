@@ -8,6 +8,7 @@ import Education from "@/components/education"
 import Experience from "@/components/experience"
 const Certificates3D = dynamic(() => import("@/components/certificates-3d"), { ssr: false })
 import ContactForm from "@/components/contact-form"
+import WhatIDo from './../components/what_i_do';
 
 function JsonLd({ data }: { data: Record<string, any> }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
@@ -78,6 +79,7 @@ export default function Page() {
       <About />
       <Education />
       <Experience />
+      <WhatIDo />
       <Skills />
       <Projects />
       <Certificates3D />

@@ -1,5 +1,7 @@
 "use client"
 
+import { useState } from "react"
+import { motion } from "framer-motion"
 import {
   FaHtml5,
   FaCss3Alt,
@@ -17,99 +19,155 @@ import {
   SiTailwindcss,
   SiFirebase,
   SiMysql,
+  SiMongodb,
+  SiSelenium,
+  SiPostman,
 } from "react-icons/si"
 
 import { VscVscode } from "react-icons/vsc"
 
-const groups = [
-  {
-    title: "Languages",
-    items: [
-      { name: "C/C++", icon: <SiCplusplus className="text-blue-400" /> },
-      { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
-      { name: "Python", icon: <FaPython className="text-green-400" /> },
-      { name: "HTML", icon: <FaHtml5 className="text-orange-500" /> },
-      { name: "CSS", icon: <FaCss3Alt className="text-blue-500" /> },
-      { name: "SQL", icon: <SiMysql className="text-sky-400" /> },
-    ],
-  },
-  {
-    title: "Frameworks & Libraries",
-    items: [
-      { name: "React.js", icon: <FaReact className="text-cyan-400" /> },
-      { name: "Tailwind CSS", icon: <SiTailwindcss className="text-sky-400" /> },
-    ],
-  },
-  {
-    title: "Tools & Platforms",
-    items: [
-      { name: "Git", icon: <FaGitAlt className="text-orange-400" /> },
-      { name: "GitHub", icon: <FaGithub className="text-gray-300" /> },
-      { name: "VS Code", icon: <VscVscode className="text-blue-400" /> },
-      { name: "Firebase", icon: <SiFirebase className="text-yellow-500" /> },
-      { name: "Figma", icon: <FaFigma className="text-pink-400" /> },
-    ],
-  },
-  {
-    title: "Concepts",
-    items: [
-      { name: "OOP" },
-      { name: "Data Structures" },
-      { name: "Algorithms" },
-      { name: "Operating Systems" },
-      { name: "DBMS" },
-    ],
-  },
-  {
-    title: "Others",
-    items: [
-      { name: "Linux", icon: <FaLinux className="text-yellow-300" /> },
-      { name: "Firebase Auth", icon: <SiFirebase className="text-yellow-500" /> },
-      { name: "FCM" },
-      { name: "QR Code Integration" },
-    ],
-  },
+type Skill = {
+  name: string
+  icon?: JSX.Element
+  level?: number
+  category: string
+}
+
+const skills: Skill[] = [
+  { name: "C/C++", icon: <SiCplusplus />, level: 80, category: "Languages" },
+  { name: "React.js", icon: <FaReact />, level: 90, category: "Frontend" },
+  { name: "JavaScript", icon: <SiJavascript />, level: 85, category: "Languages" },
+  { name: "Python", icon: <FaPython />, level: 75, category: "Languages" },
+  { name: "HTML", icon: <FaHtml5 />, level: 95, category: "Frontend" },
+  { name: "CSS", icon: <FaCss3Alt />, level: 90, category: "Frontend" },
+  { name: "SQL", icon: <SiMysql />, level: 80, category: "Database" },
+  { name: "MongoDB", icon: <SiMongodb />, level: 75, category: "Database" },
+
+  { name: "Tailwind CSS", icon: <SiTailwindcss />, level: 90, category: "Frontend" },
+  { name: "Firebase", icon: <SiFirebase />, level: 80, category: "Tools" },
+
+  { name: "Manual Testing", level: 95, category: "Testing" },
+  { name: "Selenium", icon: <SiSelenium />, level: 75, category: "Testing" },
+  { name: "Postman", icon: <SiPostman />, level: 85, category: "Testing" },
+  { name: "REST APIs", level: 85, category: "Testing" },
+
+
+  { name: "Git", icon: <FaGitAlt />, level: 85, category: "Tools" },
+  { name: "GitHub", icon: <FaGithub />, level: 90, category: "Tools" },
+  { name: "VS Code", icon: <VscVscode />, level: 95, category: "Tools" },
+
+   // Core Concepts
+  { name: "OOP", category: "Core Concepts" },
+  { name: "Data Structures", category: "Core Concepts" },
+  { name: "Algorithms", category: "Core Concepts" },
+  { name: "Operating Systems", category: "Core Concepts" },
+  { name: "DBMS", category: "Core Concepts" },
+
+  // Testing Concepts
+  { name: "SDLC", category: "Testing Concepts" },
+  { name: "STLC", category: "Testing Concepts" },
+  { name: "Defect Life Cycle", category: "Testing Concepts" },
+  { name: "Test Plan", category: "Testing Concepts" },
+  { name: "Black Box Testing", category: "Testing Concepts" },
+  { name: "Regression Testing", category: "Testing Concepts" },
+  { name: "Smoke Testing", category: "Testing Concepts" },
+  { name: "Sanity Testing", category: "Testing Concepts" },
+  { name: "Exploratory Testing", category: "Testing Concepts" },
+
 ]
 
-export default function Skills() {
-  return (
-    <section
-      id="skills"
-      aria-labelledby="skills-title"
-      className="border-t border-white/10 bg-gradient-to-b from-black via-zinc-950 to-black"
-    >
-      <div className="mx-auto max-w-6xl px-6 py-20">
-        {/* Section Title */}
-        <h2
-          id="skills-title"
-          className="text-center text-4xl font-bold tracking-wide text-white"
-        >
-          <span className="text-red-500">Skills</span> & Tech
-        </h2>
-        <p className="mt-3 text-center text-base text-white/60 max-w-2xl mx-auto">
-          A blend of languages, frameworks, and tools I use to build modern applications.
-        </p>
+const categories = ["All", "Frontend", "Languages", "Testing", "Tools", "Database" , "Core Concepts", "Testing Concepts"]
 
-        {/* Skills Grid */}
-        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {groups.map((group) => (
-            <div
-              key={group.title}
-          className="mt-8 rounded-2xl border border-white/10 bg-zinc-800/40 backdrop-blur-sm p-6 shadow-lg hover:shadow-red-500/20 transition-all duration-300 hover:-translate-y-1"
+export default function Skills() {
+  const [active, setActive] = useState("All")
+
+  const filtered =
+  active === "All"
+    ? skills.filter(
+        (s) =>
+          s.category !== "Core Concepts" &&
+          s.category !== "Testing Concepts"
+      )
+    : skills.filter((s) => s.category === active)
+
+  return (
+    <section className="relative py-28 bg-black overflow-hidden">
+      
+      {/* 🌌 Animated background glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(59,130,246,0.15),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(168,85,247,0.15),transparent_40%)]"></div>
+
+      <div className="relative max-w-6xl mx-auto px-6">
+        
+        {/* Title */}
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-center text-5xl font-bold text-white"
+        >
+          <span className="bg-gradient-to-b from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent font-sora drop-shadow-[0_0_20px_rgba(99,102,241,0.8)]">Skills</span> & Tech
+        </motion.h2>
+
+        {/* Filters */}
+        <div className="flex flex-wrap justify-center gap-3 mt-10">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActive(cat)}
+              className={`px-4 py-1.5 rounded-full text-sm border transition ${
+                active === cat
+                  ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white border-none"
+                  : "bg-white/5 text-white/70 border-white/10 hover:bg-white/10"
+              }`}
             >
-              <h3 className="text-lg font-semibold text-red-400">{group.title}</h3>
-              <div className="mt-5 flex flex-wrap gap-3">
-                {group.items.map((item) => (
-                  <span
-                    key={item.name}
-                    className="flex items-center gap-2 rounded-lg border border-white/10 bg-black/40 px-3 py-1.5 text-sm text-white/80 transition hover:bg-red-500/20 hover:text-white hover:border-red-400/50"
-                  >
-                    {item.icon && <span className="text-lg">{item.icon}</span>}
-                    {item.name}
-                  </span>
-                ))}
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+          {filtered.map((skill, i) => (
+            <motion.div
+              key={skill.name}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05 }}
+              whileHover={{ scale: 1.05, rotateX: 5, rotateY: -5 }}
+              className="group relative rounded-2xl p-[1px] bg-gradient-to-r from-blue-500/40 to-purple-500/40"
+            >
+              {/* Inner card */}
+              <div className="rounded-2xl bg-zinc-900/80 backdrop-blur-xl p-6 h-full">
+                
+                {/* Glow hover */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-2xl"></div>
+
+                <div className="relative z-10">
+                  
+                  {/* Icon + name */}
+                  <div className="flex items-center gap-3 text-white">
+                    <span className="text-2xl text-blue-400">
+                      {skill.icon}
+                    </span>
+                    <span className="font-semibold text-lg">{skill.name}</span>
+                  </div>
+
+                  {/* Animated Progress */}
+                  {skill.level && (
+                    <div className="mt-5">
+                      <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${skill.level}%` }}
+                          transition={{ duration: 1 }}
+                          className="h-full bg-gradient-to-r from-blue-400 to-purple-500"
+                        ></motion.div>
+                      </div>
+                      <p className="text-xs text-white/50 mt-1">{skill.level}%</p>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

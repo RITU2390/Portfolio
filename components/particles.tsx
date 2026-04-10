@@ -13,16 +13,18 @@ export default function Particles() {
     if (!ctx) return
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
     let width = (canvas.width = window.innerWidth)
     let height = (canvas.height = window.innerHeight)
+
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
     canvas.width = width * dpr
     canvas.height = height * dpr
     ctx.scale(dpr, dpr)
 
-    const particlesCount = reducedMotion ? 30 : 100
-    const maxDist = reducedMotion ? 60 : 120
-    const speed = reducedMotion ? 0.15 : 0.35
+    const particlesCount = reducedMotion ? 30 : 90
+    const maxDist = reducedMotion ? 60 : 130
+    const speed = reducedMotion ? 0.12 : 0.3
 
     const particles = Array.from({ length: particlesCount }, () => ({
       x: Math.random() * width,
@@ -33,20 +35,21 @@ export default function Particles() {
 
     function draw() {
       ctx.clearRect(0, 0, width, height)
-      ctx.fillStyle = "rgba(255,255,255,0.7)"
-      ctx.strokeStyle = "rgba(6,182,212,0.35)" // cyan/teal accent
-      ctx.lineWidth = 1
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i]
+
         p.x += p.vx
         p.y += p.vy
 
         if (p.x < 0 || p.x > width) p.vx *= -1
         if (p.y < 0 || p.y > height) p.vy *= -1
 
+        // 🔵 Particle color (blue glow)
+        ctx.fillStyle = "rgba(59,130,246,0.7)" // blue-500
+
         ctx.beginPath()
-        ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2)
+        ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2)
         ctx.fill()
 
         for (let j = i + 1; j < particles.length; j++) {
@@ -54,16 +57,26 @@ export default function Particles() {
           const dx = p.x - q.x
           const dy = p.y - q.y
           const dist = Math.hypot(dx, dy)
+
           if (dist < maxDist) {
-            ctx.globalAlpha = 1 - dist / maxDist
+            const alpha = 1 - dist / maxDist
+
+            // 🔥 Gradient line (blue → purple effect)
+            const gradient = ctx.createLinearGradient(p.x, p.y, q.x, q.y)
+            gradient.addColorStop(0, `rgba(59,130,246,${alpha})`)   // blue
+            gradient.addColorStop(1, `rgba(168,85,247,${alpha})`)  // purple
+
+            ctx.strokeStyle = gradient
+            ctx.lineWidth = 1
+
             ctx.beginPath()
             ctx.moveTo(p.x, p.y)
             ctx.lineTo(q.x, q.y)
             ctx.stroke()
-            ctx.globalAlpha = 1
           }
         }
       }
+
       rafRef.current = requestAnimationFrame(draw)
     }
 
@@ -85,8 +98,8 @@ export default function Particles() {
   }, [])
 
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-      <canvas ref={canvasRef} className="h-full w-full opacity-40" />
+    <div className="pointer-events-none absolute inset-0 -z-10">
+      <canvas ref={canvasRef} className="w-full h-full opacity-30" />
     </div>
   )
 }

@@ -7,7 +7,7 @@ export default function Education() {
     {
       school: "Sant Gadge Baba Amravati University",
       years: "2021 – 2025",
-      credential: "BE, Information Technology — CGPA: 8.26",
+      credential: "BE, Information Technology — CGPA: 8.28",
     },
     {
       school: "Hope Hall Foundation School (CBSE)",
@@ -24,62 +24,83 @@ export default function Education() {
   return (
     <section
       id="education"
-      aria-labelledby="education-title"
-      className="border-t border-white/10 bg-gradient-to-b from-black via-zinc-950 to-black"
+      className="relative py-24 px-4 text-white overflow-hidden"
     >
-      <div className="mx-auto max-w-5xl px-4 py-20">
-        <h2
-          id="education-title"
-          className="text-3xl font-bold text-center tracking-tight"
-        >
-          <span className="bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent">
+      {/* 🔥 Background */}
+      <div className="absolute inset-0">
+        <img
+          src="/bg_education.jpg"
+          alt="Education Background"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-[2px]" />
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+
+        {/* 🔹 TITLE */}
+        <h2 className="text-3xl md:text-6xl font-bold text-center">
+          <span className="bg-gradient-to-b from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent font-sora drop-shadow-[0_0_20px_rgba(99,102,241,0.8)]">
             Education
           </span>
         </h2>
 
-        <div className="mt-12 relative">
-          {/* Vertical timeline line */}
-          <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-red-500/60 via-white/20 to-transparent md:left-1/2" />
+        {/* 🔥 MAIN GRID */}
+        <div className="mt-16 grid md:grid-cols-2 gap-12 items-center">
 
-          <div className="space-y-12 md:space-y-16">
+          {/* 🔹 LEFT IMAGE */}
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <img
+              src="/EDUCATION.png" // 🔁 change to your image
+              alt="Education"
+              className="rounded-2xl shadow-2xl border border-white/20"
+            />
+
+            {/* Glow Effect */}
+            <div className="absolute inset-0 rounded-2xl bg-blue-500/10 blur-2xl -z-10" />
+          </motion.div>
+
+          {/* 🔹 RIGHT CONTENT */}
+          <div className="space-y-6">
             {schools.map((s, idx) => (
-              <motion.article
+              <motion.div
                 key={s.school}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.2 }}
                 viewport={{ once: true }}
-                className="relative flex flex-col md:flex-row md:items-center"
+                className="
+                  group rounded-2xl p-6
+                  bg-white/10 backdrop-blur-md
+                  border border-white/20
+                  transition-all duration-500
+                  hover:-translate-y-2 hover:scale-[1.03]
+                  hover:border-blue-400/50
+                  hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]
+                "
               >
-                {/* Dot */}
-                <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 w-3 h-3 rounded-full bg-red-500 shadow-lg shadow-red-500/40" />
+                <h3 className="text-lg md:text-xl font-semibold">
+                  {s.school}
+                </h3>
 
-                {/* Card */}
-                <div
-                  className={`ml-10 md:ml-0 md:w-1/2 ${
-                    idx % 2 === 0 ? "md:pr-12" : "md:pl-12 md:ml-auto"
-                  }`}
-                >
-                  <div
-                    tabIndex={0}
-                    className="relative rounded-2xl border border-white/10 
-                               bg-zinc-900/40 backdrop-blur-sm p-6 shadow-lg
-                               transform-gpu will-change-transform origin-center
-                               transition-all duration-300 ease-out
-                               hover:scale-[1.06] md:hover:scale-[1.08] hover:-translate-y-1
-                               focus-visible:scale-[1.06] focus-visible:-translate-y-1
-                               hover:shadow-red-500/30 focus-visible:shadow-red-500/30
-                               hover:bg-gradient-to-br hover:from-red-500/20 hover:to-pink-500/20
-                               outline-none z-0 hover:z-10 focus-visible:z-10"
-                  >
-                    <h3 className="text-lg font-semibold text-white">{s.school}</h3>
-                    <p className="mt-1 text-sm text-red-400 font-medium">{s.years}</p>
-                    <p className="mt-3 text-sm text-white/70">{s.credential}</p>
-                  </div>
-                </div>
-              </motion.article>
+                <p className="mt-1 text-sm text-blue-300 font-medium">
+                  {s.years}
+                </p>
+
+                <p className="mt-3 text-sm text-white/80 leading-relaxed">
+                  {s.credential}
+                </p>
+              </motion.div>
             ))}
           </div>
+
         </div>
       </div>
     </section>

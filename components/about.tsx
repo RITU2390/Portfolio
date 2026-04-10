@@ -3,91 +3,68 @@ export default function About() {
     <section
       id="about"
       aria-labelledby="about-title"
-      className="border-t border-white/10"
+      className="relative border-t border-white/10 overflow-hidden"
     >
-      <div className="mx-auto max-w-7xl px-4 py-16">
-        {/* Heading */}
-        <h2 id="about-title" className="text-2xl font-semibold text-balance">
-          <span className="text-red-500">About</span> Me
+      {/* 🔥 BACKGROUND IMAGE */}
+      <div className="absolute inset-0">
+        <img
+          src="/bg_about.jpg"
+          alt="Background"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* 🔥 DARK OVERLAY (VERY IMPORTANT) */}
+      <div className="absolute inset-0 bg-black/75 backdrop-blur-[2px]" />
+
+      {/* 🔥 CONTENT */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-16">
+
+        {/* 🔹 TITLE */}
+        <h2 className="text-3xl md:text-6xl font-bold text-center">
+          <span className="bg-gradient-to-b from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent font-sora drop-shadow-[0_0_20px_rgba(99,102,241,0.8)]">
+            About
+          </span>{" "}
+          <span className="text-white-400 font-playfair italic drop-shadow-[0_0_15px_rgba(59,130,246,0.7)]">Me</span>
         </h2>
 
-        {/* Introduction */}
-        <p className="mt-4 text-white/90 leading-relaxed">
-          I’m a final-year <span className="font-semibold">Information Technology (BE, 2025)</span> student, passionate about
-          <span className="text-red-400"> Software Engineering, Cybersecurity, and Cloud Technologies</span>.  
-          My focus lies in building secure, scalable, and user-friendly applications that solve real-world problems.
+        {/* 🔹 INTRO */}
+        <p className="mt-6 text-base md:text-lg text-white/90 leading-relaxed text-center max-w-4xl mx-auto">
+          I hold a{" "}
+          <span className="font-semibold">Bachelor of Engineering</span> in{" "}
+          <span className="font-semibold">Information Technology</span> from{" "}
+          <span className="font-semibold">
+            Sant Gadge Baba Amravati University
+          </span>{" "}
+          (2025) with a CGPA of <span className="font-semibold">8.28</span>. I
+          am a driven and detail-oriented individual with a keen interest in{" "}
+          <span className="block mt-2 bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent font-medium">
+  Software Engineering, Cybersecurity, and Cloud Technologies.
+</span>
+
         </p>
 
-        {/* Internship Experience */}
-        <div className="mt-6">
-          <h3 className="text-xl font-semibold text-red-400">💼 Internship Experience</h3>
-          <p className="mt-2 text-white/90 leading-relaxed">
-            During my <span className="font-medium">Project Management Internship at ATG, Banao</span>,  
-            I led client projects that achieved:
-          </p>
-          <ul className="list-disc list-inside mt-2 text-white/90 space-y-1">
-            <li>📈 20% increase in user engagement</li>
-            <li>✅ 30% improvement in content accuracy</li>
-            <li>👥 Leadership experience managing a 5-member team</li>
-          </ul>
-        </div>
+        {/* 🔹 SECOND PARAGRAPH */}
+        <p className="mt-4 text-base md:text-lg text-white/80 leading-relaxed text-center max-w-3xl mx-auto">
+          My focus lies in building{" "}
+          <span className="font-medium text-white">
+            secure, scalable, and efficient applications
+          </span>{" "}
+          that deliver meaningful user experiences and solve real-world
+          problems. I possess a strong technical foundation and continuously
+          work towards expanding my expertise by learning modern tools,
+          frameworks, and best practices.
+        </p>
 
-        {/* Projects */}
-        <div className="mt-6">
-          <h3 className="text-xl font-semibold text-red-400">🚀 Key Projects</h3>
-          <ul className="list-disc list-inside mt-2 text-white/90 space-y-1">
-            <li>
-              <span className="font-medium">QR-Based E-Gate Pass Management System</span> –  
-              Built with React.js & Firebase, featuring secure QR access and real-time notifications.
-            </li>
-            <li>
-              <span className="font-medium">Vehicle Services Management System</span> –  
-              Full-stack web app for service scheduling, tracking, and customer data management.
-            </li>
-          </ul>
-        </div>
-
-        {/* Skills */}
-        <div className="mt-6">
-          <h3 className="text-xl font-semibold text-red-400">🛠 Technical Skills</h3>
-          <p className="mt-2 text-white/90">
-            <span className="font-medium">Languages:</span> C/C++, Python, JavaScript, SQL, HTML, CSS <br />
-            <span className="font-medium">Frameworks & Tools:</span> React.js, Bootstrap, Tailwind, Firebase, Git/GitHub, Linux, Figma <br />
-            <span className="font-medium">Core Areas:</span> OOP, Data Structures & Algorithms, DBMS, Operating Systems, Secure App Development
-          </p>
-        </div>
-
-        {/* Certifications */}
-        <div className="mt-6">
-          <h3 className="text-xl font-semibold text-red-400">🎓 Certifications</h3>
-          <ul className="list-disc list-inside mt-2 text-white/90 space-y-1">
-            <li>Google Cybersecurity Professional</li>
-            <li>Google AI Essentials</li>
-            <li>SQL for Data Science</li>
-            <li>Android Developer Internship</li>
-          </ul>
-        </div>
-
-        {/* Extracurricular */}
-        <div className="mt-6">
-          <h3 className="text-xl font-semibold text-red-400">⚡ Beyond Academics</h3>
-          <p className="mt-2 text-white/90 leading-relaxed">
-            I’m an active sports enthusiast <span className=" text-red-400"> —3rd place in Intercollegiate Handball</span>, with achievements in table tennis and badminton.  
-            These experiences have sharpened my <span className="font-medium">teamwork, focus, and resilience</span>.
-          </p>
-        </div>
-
-        {/* Career Goals */}
-        <div className="mt-6">
-          <h3 className="text-xl font-semibold text-red-400">🔍 Career Goals</h3>
-          <p className="mt-2 text-white/90 leading-relaxed">
-            I’m actively seeking opportunities in <span className="font-medium">Software Development, Cybersecurity, and Cloud/DevOps</span>,  
-            where I can contribute with technical expertise and a problem-solving mindset.
-          </p>
-          <p className="mt-2 text-white/90">
-            📫 Let’s connect—I’m always open to networking, mentorship, and new opportunities.
-          </p>
-        </div>
+        {/* 🔹 THIRD PARAGRAPH */}
+        <p className="mt-4 text-base md:text-lg text-white/80 leading-relaxed text-center max-w-3xl mx-auto">
+          I am committed to continuous improvement and look forward to
+          contributing to impactful projects in a{" "}
+          <span className="font-medium text-white">
+            collaborative and growth-oriented environment
+          </span>
+          .
+        </p>
       </div>
     </section>
   );
